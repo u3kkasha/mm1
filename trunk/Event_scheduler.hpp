@@ -5,12 +5,11 @@
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
 
 #include "Enumerations.cc"
-namespace Singleton
+namespace Singleton {
+class Event_scheduler : private Enumerations //I am inheriting the Enumerations class in order to avoid writing prefixes like Enumerations::Event_kind
+
 {
-class Event_scheduler : private Enumerations  //I am inheriting the Enumerations class in order to avoid writing prefixes like Enumerations::Event_kind
-   
-{
-     /*
+    /*
    بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
    ==Class Description==
    ۞ Name: Event Scheduler
@@ -19,11 +18,10 @@ class Event_scheduler : private Enumerations  //I am inheriting the Enumerations
    ۞ Mechanism: Schedules next event by adding new event into Event list.
    */
 
-  
-  public:
-	static void schedule_next_arrival();
-	static void schedule_next_departure();
-	static void schedule_termination();
+public:
+    static void schedule_next_arrival(int target_entity_number);
+    static void schedule_next_departure(int target_entity_number);
+    static void schedule_termination();
 };
 }
 

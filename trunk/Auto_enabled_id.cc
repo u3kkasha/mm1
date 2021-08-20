@@ -1,26 +1,22 @@
 #ifndef AUTO_ENABLED_ID_H
 #define AUTO_ENABLED_ID_H
 
+class Auto_enabled_id {
+public:
+    Auto_enabled_id()
+    {
 
-class Auto_enabled_id
-{
-    public:
-    Auto_enabled_id() {
-        //ctor
-
-        total_id++;
-
-        id = total_id;
+        id = total_id++;
         // for auto generating the IDs
     }
 
-
-    protected:
-    int get_id() {
+protected:
+    int get_id()
+    {
         return id;
     }
 
-    private:
+private:
     static inline int total_id = 0;
     int id;
 };

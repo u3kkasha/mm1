@@ -1,4 +1,4 @@
-#if not defined (DEBUGGING_OPTIONS_GUARD)
+#if not defined(DEBUGGING_OPTIONS_GUARD)
 #define DEBUGGING_OPTIONS_GUARD
 
 /*
@@ -18,9 +18,7 @@ In order to activate debugging options include this library in your file #includ
 
 */
 
-
-
-#include<iostream> //for std::cout
+#include <iostream> //for std::cout
 
 /*
 +Purpose:
@@ -47,13 +45,6 @@ And Allah knows best
 
 */
 
-
-#define DEBUGGING_PRINT( variable )  std::cout<< #variable <<"= "<<variable<<" from line number-"<< __LINE__<<" inside the function  "<<__FUNCTION__<<"()\n";
-
-
-
-
-
-
+#define DEBUGGING_PRINT(variable) std::cout << #variable << "= " << variable << " from line number-" << __LINE__ << " inside the function  " << __FUNCTION__ << "()\n";
 
 #endif // end of guard

@@ -2,29 +2,25 @@
 #define JOB_H
 
 #include "Auto_enabled_id.cc"
+#include <vector>
+class Job : public Auto_enabled_id {
+public:
+    //exposing protected parent method as public.
+    using Auto_enabled_id::get_id;
+    int get_arrival_time(int index) { return arrival_time[index]; }
+    void set_arrival_time(int index, int val) { arrival_time[index] = val; }
+    int get_service_beginning_time(int index) { return service_beginning_time[index]; }
+    void set_service_beginning_time(int index, int val) { service_beginning_time[index] = val; }
+    int get_departure_time(int index) { return departure_time[index]; }
+    void set_departure_time(int index, int val) { departure_time[index] = val; }
+    int get_waiting_time(int index) { return service_beginning_time[index] - arrival_time[index]; }
+    int get_service_time(int index) { return departure_time[index] - service_beginning_time[index]; }
+    int get_sojourn_time(int index) { return get_waiting_time(index) + get_service_time(index); }
 
-
-class Job : public Auto_enabled_id
-{
-    public:
-        //exposing protected member as public.
-        using Auto_enabled_id::get_id;
-        int get_arrival_time() { return arrival_time; }
-        void set_arrival_time(int val) { arrival_time = val; }
-        int get_service_beginning_time() { return service_beginning_time; }
-        void set_service_beginning_time(int val) { service_beginning_time = val; }
-        int set_departure_time() { return departure_time; }
-        void set_departure_time(int val) { departure_time = val; }
-        int get_waiting_time(){return service_beginning_time-arrival_time;}
-        int get_service_time(){return departure_time-service_beginning_time;}
-        int get_sojourn_time(){return get_waiting_time()+get_service_time();}
-
-    protected:
-
-    private:
-        int arrival_time;
-        int service_beginning_time;
-        int departure_time;
+private:
+    std::vector<int> arrival_time;
+    std::vector<int> service_beginning_time;
+    std::vector<int> departure_time;
 };
 
 #endif // JOB_H

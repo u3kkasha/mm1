@@ -26,7 +26,7 @@ private:
         events; //need to use std:: greater<> to get min priority queue
 
 public:
-    static void add_event(Event_kind event_type, int trigger_time, int target_entity_number)
+    static void add_event(Event_kind event_type, int trigger_time, int target_entity_number = 0)
     {
         events.emplace(event_type, trigger_time, target_entity_number);
     }

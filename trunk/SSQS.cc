@@ -22,9 +22,6 @@ public:
             //insert job to the queue
             queue.insert(just_arrived_job);
 
-            //if waiting line queue is full then exception will be thrown in sha Allah
-            //store arrival time of this job is already done
-
         } else //server is idle
         {
             just_arrived_job.set_service_beginning_time(get_id(), Singleton::Timing_unit::get_current_time()); //delay/waiting time is now 0

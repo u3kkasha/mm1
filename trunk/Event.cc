@@ -3,9 +3,8 @@
 
 #pragma once
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
-
 #include "Enumerations.cc"
-#include "Job_processing_system.hpp"
+#include "Job_service_complex.hpp"
 
 class Event : private Singleton::Enumerations //I am inheriting the Enumerations class in order to avoid writing long prefixes like Singleton::Enumerations::Event_kind
 {
@@ -41,13 +40,13 @@ public:
     }
     void handle()
     {
-        using Current_System = Singleton::Job_processing_system; // this alias can be changed to another system with equivalent interface of needed later on
+        using Current_System = Singleton::Job_service_complex; // this alias can be changed to another system with equivalent interface of needed later on
         switch (event_type) {
         case Event_kind::arrival:
-            Current_System::arrival();
+            Current_System::arrival(target_entity_number);
             break;
         case Event_kind::departure:
-            Current_System::departure();
+            Current_System::departure(target_entity_number);
             break;
         case Event_kind::termination:
             Current_System::termination();

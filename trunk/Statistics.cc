@@ -21,10 +21,6 @@ private:
     static inline std::list<Job> completed_jobs;
 
 public:
-    static void increment_number_of_jobs_delayed()
-    {
-        number_of_waited_jobs++;
-    }
     static void add_completed_job(Job completed_job)
     {
         completed_jobs.emplace_back(completed_job);

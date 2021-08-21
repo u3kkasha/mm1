@@ -47,7 +47,7 @@ public:
     static void start()
     {
         initialise();
-        Event_scheduler::schedule_next_arrival();
+        Event_scheduler::schedule_next_arrival(0);
         Event_scheduler::schedule_termination();
 
         run();

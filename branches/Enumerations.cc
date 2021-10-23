@@ -1,7 +1,6 @@
 #if not defined(ENUMERATIONS_GUARD)
 #define ENUMERATIONS_GUARD
 
-#pragma once
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
 
 namespace Singleton {
@@ -24,15 +23,7 @@ public:
         departure,
         termination
     };
-    enum class Information_kind {
-        service_time,
-        waiting_time,
-        sojourn_time
-    };
-    enum class Average_kind {
-        job,
-        time
-    };
+   
 }; //end of class
 
 } //end of namespace

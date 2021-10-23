@@ -4,6 +4,7 @@
 #include "Auto_enabled_id.cc"
 #include "Joblet.cc"
 #include <vector>
+#include <numeric>
 class Job : public Auto_enabled_id<Job>
 {
     public:
@@ -18,6 +19,9 @@ class Job : public Auto_enabled_id<Job>
         int get_waiting_time(int index){return subjobs.at(index).get_service_beginning_time()-subjobs.at(index).get_arrival_time();}
         int get_service_time(int index){return subjobs.at(index).get_departure_time()-subjobs.at(index).get_service_beginning_time();}
         int get_sojourn_time(int index){return get_waiting_time(index)+get_service_time(index);}
+        int get_waiting_time(){return std::accumulate(std::begin(subjobs),std::end(subjobs),0,[](int sum,Joblet joblet){return sum+joblet.get_waiting_time();});}
+        int get_service_time(){return std::accumulate(std::begin(subjobs),std::end(subjobs),0,[](int sum,Joblet joblet){return sum+joblet.get_service_time();});}
+        int get_sojourn_time(){return get_waiting_time()+get_service_time();}
     private:
         std::vector<Joblet> subjobs=std::vector<Joblet>(2);
 };

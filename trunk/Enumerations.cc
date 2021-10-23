@@ -1,7 +1,6 @@
 #if not defined(ENUMERATIONS_GUARD)
 #define ENUMERATIONS_GUARD
 
-#pragma once
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
 
 namespace Singleton {

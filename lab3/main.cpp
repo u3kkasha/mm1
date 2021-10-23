@@ -35,7 +35,7 @@ double avg_waiting_time()
     auto jobs=Statistics::get_list_of_completed_jobs();
     return std::accumulate(std::begin(jobs),std::end(jobs),0,[](int total,Job job){return total+job.get_waiting_time();})/jobs.size();
 }
-int main()
+int main(int number_of_command_line_arguments,char[] command_line_arguments)
 {
    Simulation_settings settings=Simulation::get_settings();
     settings. set_number_of_servers(2);

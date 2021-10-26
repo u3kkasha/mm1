@@ -11,41 +11,50 @@
 #include "Timing_unit.cc"
 
 namespace Singleton {
-void Event_scheduler::schedule_next_arrival(int target_entity_number=0)
-{
+void Event_scheduler::schedule_next_arrival(int target_entity_number = 0) {
 
-    /*
-            +Mechanism: adds a arrival event to the Event list with trigger time=current_time+exponential random variate with inter_arrival mean specified in simulation settings in sha Allah.
-            
-            */
-    auto settings = Simulation::get_settings();
-    auto mean_inter_arrival_time = settings.get_mean_inter_arrival_time(target_entity_number);
-    int trigger_time = Timing_unit::get_current_time() + Random_variate_generator::get_exponential(mean_inter_arrival_time);
-    Event_list::add_event(Event::Event_kind::arrival, trigger_time, target_entity_number);
+  /*
+          +Mechanism: adds a arrival event to the Event list with trigger
+     time=current_time+exponential random variate with inter_arrival mean
+     specified in simulation settings in sha Allah.
+
+          */
+  auto settings = Simulation::get_settings();
+  auto mean_inter_arrival_time =
+      settings.get_mean_inter_arrival_time(target_entity_number);
+  int trigger_time =
+      Timing_unit::get_current_time() +
+      Random_variate_generator::get_exponential(mean_inter_arrival_time);
+  Event_list::add_event(Event::Event_kind::arrival, trigger_time,
+                        target_entity_number);
 }
-void Event_scheduler::schedule_next_departure(int target_entity_number)
-{
+void Event_scheduler::schedule_next_departure(int target_entity_number) {
 
-    /*
-            +Mechanism: adds a departure event to the Event list with trigger time=current_time+exponential random variate with service mean specified in simulation settings in sha Allah.
-            
-        */
-    auto settings = Simulation::get_settings();
-    auto mean_service_time = settings.get_mean_service_time(target_entity_number);
-    int trigger_time = Timing_unit::get_current_time() + Random_variate_generator::get_exponential(mean_service_time);
-    Event_list::add_event(Event::Event_kind::departure, trigger_time, target_entity_number);
+  /*
+          +Mechanism: adds a departure event to the Event list with trigger
+     time=current_time+exponential random variate with service mean specified in
+     simulation settings in sha Allah.
+
+      */
+  auto settings = Simulation::get_settings();
+  auto mean_service_time = settings.get_mean_service_time(target_entity_number);
+  int trigger_time =
+      Timing_unit::get_current_time() +
+      Random_variate_generator::get_exponential(mean_service_time);
+  Event_list::add_event(Event::Event_kind::departure, trigger_time,
+                        target_entity_number);
 }
-void Event_scheduler::schedule_termination()
-{
+void Event_scheduler::schedule_termination() {
 
-    /*
-            +Mechanism: adds a termination event to the Event list with trigger time=termination time specified in simulation settings in sha Allah.
-            
-    */
-    auto settings = Simulation::get_settings();
-    int trigger_time = settings.get_termination_time();
-    Event_list::add_event(Event::Event_kind::termination, trigger_time);
+  /*
+          +Mechanism: adds a termination event to the Event list with trigger
+     time=termination time specified in simulation settings in sha Allah.
+
+  */
+  auto settings = Simulation::get_settings();
+  int trigger_time = settings.get_termination_time();
+  Event_list::add_event(Event::Event_kind::termination, trigger_time);
 }
 
-} //end of namespace
-#endif //end of guard band
+} // namespace Singleton
+#endif // end of guard band

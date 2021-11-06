@@ -6,7 +6,6 @@
 #include "Event_list.cc"
 #include "Event_scheduler.hpp"
 #include "Job_service_complex.hpp"
-#include "Simulation_settings.cc"
 #include "Timing_unit.cc"
 namespace Singleton {
 class Simulation {
@@ -22,7 +21,6 @@ class Simulation {
  */
 
 private:
-  inline static Simulation_settings settings;
   static void initialise() {
     // Job_service_complex::setup(2);
     Timing_unit::reset_clock();
@@ -37,10 +35,6 @@ private:
   }
 
 public:
-  static void set_settings(Simulation_settings new_settings) {
-    settings = new_settings;
-  }
-  static Simulation_settings get_settings() { return settings; }
   static void start() {
 
     initialise();

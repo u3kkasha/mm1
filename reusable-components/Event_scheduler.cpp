@@ -7,11 +7,11 @@
 #include "Event_list.cc"
 #include "Random_variate_generator.cc"
 #include "Simulation.cc"
-#include "Simulation_settings.cc"
+#include "Simulation_parameters.cc"
 #include "Timing_unit.cc"
 
 namespace Singleton {
-void Event_scheduler::schedule_next_arrival(int target_entity_number = 0) {
+void Event_scheduler::schedule_next_arrival() {
 
   /*
           +Mechanism: adds a arrival event to the Event list with trigger
@@ -19,9 +19,8 @@ void Event_scheduler::schedule_next_arrival(int target_entity_number = 0) {
      specified in simulation settings in sha Allah.
 
           */
-  auto settings = Simulation::get_settings();
-  auto mean_inter_arrival_time =
-      settings.get_mean_inter_arrival_time(target_entity_number);
+  
+  auto mean_inter_arrival_time =Simulation_parameters::mean_inter_arrival_time;
   int trigger_time =
       Timing_unit::get_current_time() +
       Random_variate_generator::get_exponential(mean_inter_arrival_time);

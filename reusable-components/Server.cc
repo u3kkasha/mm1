@@ -16,7 +16,7 @@ private:
 public:
   auto release_job() 
   { 
-    return std::move(job_being_served_curently).value(); 
+    return job_being_served_curently.value(); 
   }
   
   void assign_job(Job new_job) 

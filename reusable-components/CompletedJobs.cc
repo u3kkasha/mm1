@@ -6,7 +6,7 @@
 #include "Job.cc"
 #include <list>
 namespace Singleton {
-class Statistics {
+class CompletedJobs {
   /*
  بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
  ==Class Description==
@@ -18,13 +18,10 @@ class Statistics {
  */
 
 private:
-  static int inline number_of_waited_jobs = 0;
   static inline std::list<Job> completed_jobs;
 
 public:
-  static void add_completed_job(Job completed_job) {
-    completed_jobs.push_back(completed_job);
-  }
+  static void add(Job completed_job) {completed_jobs.push_back(completed_job); }
   static auto get_list_of_completed_jobs() { return completed_jobs; }
   static auto get_number_of_completed_jobs() { return completed_jobs.size(); }
 }; // end of class

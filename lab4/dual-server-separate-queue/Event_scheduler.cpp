@@ -27,7 +27,7 @@ void Event_scheduler::schedule_next_departure(SSQS &target_entity,
 }
 void Event_scheduler::schedule_termination() {
 
-  int trigger_time = Simulation_parameters::termination_time();
+  int trigger_time = Simulation_parameters::termination_time;
   Event_list::add_event(Event::Event_kind::termination, trigger_time);
 }
 

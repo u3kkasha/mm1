@@ -32,8 +32,9 @@ public:
 
   explicit Event(Event::Event_kind chosen_event, int chosen_trigger_time,
                  SSQS &chosen_target_entity)
-      : target_entity(chosen_target_entity),
-        Event(chosen_event, chosen_trigger_time) {}
+      :Event(chosen_event, chosen_trigger_time) {
+          target_entity=chosen_target_entity;
+      }
 
   void handle() {
     using Current_System =
@@ -67,7 +68,7 @@ public:
 private:
   int trigger_time = 0;
   Event::Event_kind event_type; // arrival or departure or termination
-  std::reference_wrapper<SSQS> target_entity;
+  std::reference_wrapper<SSQS> target_entity=Singleton::Job_service_complex::get_ref_first();
 
 };     // end of class
 #endif // end of guard band

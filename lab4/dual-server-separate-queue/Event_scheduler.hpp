@@ -2,7 +2,7 @@
 #define EVENT_SCHEDULER_H_GUARD
 
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
-#include "SSQS.cc"
+#include "SSQS.hpp"
 
 namespace Singleton {
 class Event_scheduler {

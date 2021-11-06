@@ -35,11 +35,11 @@ public:
     update_history_log();
   }
 
-  auto&& remove()
+  auto remove()
 
   {
 
-    auto&& j = fifo_queue.front();
+    auto j = fifo_queue.front();
 
     fifo_queue.pop();
 

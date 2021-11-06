@@ -34,7 +34,7 @@ class Random_variate_generator {
 
 private:
   // set initial seed value to current time
-  inline static const int seed = time(NULL);
+  inline static int seed = time(NULL);
 
   static double get_random_number_pmmlcg() {
     /*
@@ -69,7 +69,7 @@ private:
   }
 
 public:
-  void set_seed(int seed_value) { seed = seed_value; }
+  void static set_seed(int seed_value) { seed = seed_value; }
 
   // This is a function pointer reference to the random number generator
   // function, if necessary a new random number generator function implementing

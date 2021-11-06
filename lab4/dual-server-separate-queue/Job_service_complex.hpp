@@ -2,15 +2,16 @@
 #if not defined(JSCX_H)
 #define JSCX_H
 #include "SSQS.hpp"
-#include <utility>
+
 namespace Singleton {
 class Job_service_complex {
 private:
-  static inline std::pair<SSQS, SSQS> job_processing_systems;
-  SSQS &get_ssqs_with_shortest_queue();
+  static inline SSQS first;
+  static inline SSQS second;
+  static inline SSQS &get_ssqs_with_shortest_queue();
 
 public:
-
+  static SSQS &get_ref_first()    {return first;}
   static void arrival();
   static void termination();
 

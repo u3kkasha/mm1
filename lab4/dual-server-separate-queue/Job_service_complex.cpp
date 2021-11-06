@@ -5,17 +5,16 @@
 #include "Job_service_complex.hpp"
 #include "Event_list.cc"
 #include "Event_scheduler.hpp"
-#include "SSQS.cc"
-#include "Statistics.cc"
+#include "SSQS.hpp"
 #include <vector>
 namespace Singleton {
 
-[[nodiscard]] SSQS &Job_service_complex::get_ssqs_with_shortest_queue {
-  if (job_processing_systems.first.get_queue_length() <
-      job_processing_systems.second.get_queue_length())
-    return &job_processing_systems.first;
+SSQS &Job_service_complex::get_ssqs_with_shortest_queue() {
+  if (first.get_queue_length() <
+      second.get_queue_length())
+    return first;
   else
-    return &job_processing_systems.second;
+    return second;
 }
 
 void Job_service_complex::arrival() {

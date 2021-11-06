@@ -14,11 +14,11 @@ private:
 public:
   auto release_job() { return job_being_served_currently; }
 
-  void assign_job(Job new_job) { job_being_served_currently = std::move(new_job); }
+  void assign_job(Job new_job) { job_being_served_currently = new_job; }
 
-  void set_job_being_served_curently(Job new_job) { assign_job(new_job); }
+  void set_job_being_served_currently(Job new_job) { assign_job(new_job); }
 
-  auto get_job_being_served_curently() { return release_job(); }
+  auto get_job_being_served_currently() { return release_job(); }
 
   bool is_busy() {
     bool v = (current_status) ? true : false;

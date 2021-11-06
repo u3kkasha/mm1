@@ -6,7 +6,7 @@
 #include "Job.cc"
 #include <list>
 namespace Singleton {
-class CompletedJobs {
+class Completed_jobs {
   /*
  بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
  ==Class Description==

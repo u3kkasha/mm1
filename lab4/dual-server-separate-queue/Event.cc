@@ -4,6 +4,7 @@
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
 
 #include "Job_service_complex.hpp"
+#include "SSQS.hpp"
 #include <stdexcept>
 
 class Event {
@@ -21,14 +22,19 @@ class Event {
 public:
   enum class Event_kind { arrival, departure, termination };
 
-  Event(Event::Event_kind chosen_event, int chosen_trigger_time,
-        int chosen_target_entity_number)
-      : Event(chosen_event, chosen_trigger_time) {
-    if (chosen_target_entity_number >= 0)
-      target_entity_number = chosen_target_entity_number;
+  explicit Event(Event::Event_kind chosen_event, int chosen_trigger_time)
+      : event_type(chosen_event) {
+    if (chosen_trigger_time > 0)
+      trigger_time = chosen_trigger_time;
     else
-      throw std::domain_error("Received a negative target_entity_number");
+      throw std::invalid_argument("Received a negative trigger_time");
   }
+
+  explicit Event(Event::Event_kind chosen_event, int chosen_trigger_time,
+                 SSQS &chosen_target_entity)
+      : target_entity(chosen_target_entity),
+        Event(chosen_event, chosen_trigger_time) {}
+
   void handle() {
     using Current_System =
         Singleton::Job_service_complex; // this alias can be changed to another
@@ -36,19 +42,20 @@ public:
                                         // needed later on
     switch (event_type) {
     case Event::Event_kind::arrival:
-      Current_System::arrival(target_entity_number);
+      Current_System::arrival();
       break;
     case Event::Event_kind::departure:
-      Current_System::departure(target_entity_number);
+      target_entity.get().departure();
       break;
     case Event::Event_kind::termination:
       Current_System::termination();
       break; // break is not necessary here, but just in case I add new cases
              // later and maybe forget to write break statement at that time  in
              // this line here
-    } // end of event switch
+    }        // end of event switch
 
   } // end of handle()
+
   auto inline get_trigger_time() const { return trigger_time; }
   auto inline get_event_type() { return event_type; }
   bool operator>(const Event compared_to)
@@ -60,16 +67,7 @@ public:
 private:
   int trigger_time = 0;
   Event::Event_kind event_type; // arrival or departure or termination
-  int target_entity_number = 0;
-
-  Event(Event::Event_kind chosen_event, int chosen_trigger_time)
-      : event_type(chosen_event) {
-    // parameter check
-    if (chosen_trigger_time > 0)
-      trigger_time = chosen_trigger_time;
-    else
-      throw std::domain_error("Received a negative trigger_time");
-  }
+  std::reference_wrapper<SSQS> target_entity;
 
 };     // end of class
 #endif // end of guard band

@@ -13,45 +13,21 @@
 namespace Singleton {
 void Event_scheduler::schedule_next_arrival() {
 
-  /*
-          +Mechanism: adds a arrival event to the Event list with trigger
-     time=current_time+exponential random variate with inter_arrival mean
-     specified in simulation settings in sha Allah.
-
-          */
-  
-  auto mean_inter_arrival_time =Simulation_parameters::mean_inter_arrival_time;
   int trigger_time =
       Timing_unit::get_current_time() +
-      Random_variate_generator::get_exponential(mean_inter_arrival_time);
-  Event_list::add_event(Event::Event_kind::arrival, trigger_time,
-                        target_entity_number);
+      Random_variate_generator::get_random_inter_arrival_duration();
+  Event_list::add_event(Event::Event_kind::arrival, trigger_time);
 }
-void Event_scheduler::schedule_next_departure(int target_entity_number) {
+void Event_scheduler::schedule_next_departure(SSQS &target_entity,
+                                              int duration_till_trigger) {
 
-  /*
-          +Mechanism: adds a departure event to the Event list with trigger
-     time=current_time+exponential random variate with service mean specified in
-     simulation settings in sha Allah.
-
-      */
-  auto settings = Simulation::get_settings();
-  auto mean_service_time = settings.get_mean_service_time(target_entity_number);
-  int trigger_time =
-      Timing_unit::get_current_time() +
-      Random_variate_generator::get_exponential(mean_service_time);
+  int trigger_time = Timing_unit::get_current_time() + duration_till_trigger;
   Event_list::add_event(Event::Event_kind::departure, trigger_time,
-                        target_entity_number);
+                        target_entity);
 }
 void Event_scheduler::schedule_termination() {
 
-  /*
-          +Mechanism: adds a termination event to the Event list with trigger
-     time=termination time specified in simulation settings in sha Allah.
-
-  */
-  auto settings = Simulation::get_settings();
-  int trigger_time = settings.get_termination_time();
+  int trigger_time = Simulation_parameters::termination_time();
   Event_list::add_event(Event::Event_kind::termination, trigger_time);
 }
 

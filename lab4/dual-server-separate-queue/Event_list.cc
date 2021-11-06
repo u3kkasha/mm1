@@ -28,6 +28,9 @@ public:
                         int target_entity_number = 0) {
     events.emplace(event_type, trigger_time, target_entity_number);
   }
+  static void add_event(Event::Event_kind event_type, int trigger_time) {
+    events.emplace(event_type, trigger_time);
+  }
   static Event remove_event() {
     auto removed_event = events.top();
     events.pop();

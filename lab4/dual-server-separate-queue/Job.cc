@@ -8,18 +8,19 @@ public:
   // exposing protected member as public.
   using Auto_enabled_id<Job>::get_id;
   
-  Job(int arrival_time,int service_duration) : arrival_time(arrival_time), service_duration(service_duration)
-  {
-      
-  }
+  auto get_waiting_time() { return service_beginning_time - arrival_time; }
   
-  auto get_waiting_time() {return service_beginning_time-arrival_time;}
+  Job(int arrival_time, int service_duration)
+      : arrival_time(arrival_time), service_duration(service_duration) {}
+
+  Job(Job&&) = default;
+
   
-  
-  int service_duration;
-  
+
   int arrival_time;
   int service_beginning_time;
+  
+  int service_duration;
 };
 
 #endif // JOB_H

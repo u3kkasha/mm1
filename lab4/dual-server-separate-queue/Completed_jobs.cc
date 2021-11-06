@@ -21,7 +21,9 @@ private:
   static inline std::list<Job> completed_jobs;
 
 public:
-  static void add(Job completed_job) {completed_jobs.push_back(completed_job); }
+  static void add(Job completed_job) {
+    completed_jobs.push_back(completed_job);
+  }
   static auto get_list_of_completed_jobs() { return completed_jobs; }
   static auto get_number_of_completed_jobs() { return completed_jobs.size(); }
 }; // end of class

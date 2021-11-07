@@ -1,7 +1,7 @@
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
 
 #include "Log.hpp"
-#include "Simulation.cc"
+#include "Simulation_parameters.cc"
 
 double Log::average_load() {
   /**
@@ -12,7 +12,7 @@ double Log::average_load() {
      */
   long result = 0;
   auto termination_time =
-      Singleton::Simulation::get_settings().get_termination_time();
+      Singleton::Simulation_parameters::termination_time;
 
   add_datum(datum(termination_time,
                   0)); // this needs to be done for calculation purposes

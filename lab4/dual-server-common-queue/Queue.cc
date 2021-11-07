@@ -35,11 +35,11 @@ public:
     update_history_log();
   }
 
-  Job remove()
+  auto remove()
 
   {
 
-    Job j = fifo_queue.front();
+    auto j = fifo_queue.front();
 
     fifo_queue.pop();
 
@@ -52,19 +52,21 @@ public:
 
   Log get_log() { return history; }
 
-  Job &head()
+  auto &head()
 
   {
 
     return fifo_queue.front();
   }
 
-  Job &tail()
+  auto &tail()
 
   {
 
     return fifo_queue.back();
   }
+
+  auto get_length() { return fifo_queue.size(); }
 
 private:
   std::queue<Job> fifo_queue;

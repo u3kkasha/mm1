@@ -4,6 +4,7 @@
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
 
 #include "Event.cc"
+#include "Server.hpp"
 #include <queue>
 namespace Singleton {
 class Event_list {
@@ -25,8 +26,11 @@ private:
 
 public:
   static void add_event(Event::Event_kind event_type, int trigger_time,
-                        int target_entity_number = 0) {
-    events.emplace(event_type, trigger_time, target_entity_number);
+                        Server& target_entity) {
+    events.emplace(event_type, trigger_time, target_entity);
+  }
+  static void add_event(Event::Event_kind event_type, int trigger_time) {
+    events.emplace(event_type, trigger_time);
   }
   static Event remove_event() {
     auto removed_event = events.top();

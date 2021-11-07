@@ -21,6 +21,7 @@ distribution
 
 */
 
+#include "Simulation_parameters.cc"
 #include <climits>
 #include <cmath>
 #include <ctime>
@@ -33,12 +34,11 @@ class Random_variate_generator {
 
 private:
   // set initial seed value to current time
-  inline static const int seed = time(NULL);
+  inline static int seed = time(NULL);
 
   static double get_random_number_pmmlcg() {
     /*
     +Purpose: Returns a random value from the range [0,1]
-    +Dependencies: None
     +Author: 215
     +Parameter: void
     +Sample output
@@ -69,6 +69,8 @@ private:
   }
 
 public:
+  void static set_seed(int seed_value) { seed = seed_value; }
+
   // This is a function pointer reference to the random number generator
   // function, if necessary a new random number generator function implementing
   // another method of random number generator can be added and only this
@@ -97,6 +99,14 @@ public:
     +Parameter: A double value of the mean arrival time for this distribution
     */
     return -mean * std::log(get_random_number());
+  }
+
+  static double get_random_service_duration() {
+    return get_exponential(Simulation_parameters::mean_service_duration);
+  }
+
+  static double get_random_inter_arrival_duration() {
+    return get_exponential(Simulation_parameters::mean_inter_arrival_duration);
   }
 
 }; // end of class

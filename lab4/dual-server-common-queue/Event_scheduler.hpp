@@ -1,9 +1,8 @@
 #if not defined(EVENT_SCHEDULER_H_GUARD)
 #define EVENT_SCHEDULER_H_GUARD
-#pragma once
 
 //بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيْمِ
-
+#include "Server.hpp"
 namespace Singleton {
 class Event_scheduler {
   /*
@@ -16,8 +15,8 @@ class Event_scheduler {
  */
 
 public:
-  static void schedule_next_arrival(int target_entity_number);
-  static void schedule_next_departure(int target_entity_number);
+  static void schedule_next_arrival();
+  static void schedule_next_departure(Server&, int);
   static void schedule_termination();
 };
 } // namespace Singleton

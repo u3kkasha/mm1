@@ -3,7 +3,8 @@
 
 #include <list>
 #include <utility>
-
+#include <iostream>
+#include <algorithm>
 using datum = std::pair<int, int>;
 
 class Log {
@@ -20,7 +21,12 @@ public:
   Log() {
     add_datum(datum(0, 0)); // initial condition
   }
-
+  void print()
+  {
+      std::for_each(data.begin(),data.end(),
+      [](auto &element){ std::cout<<element.first<<' '<<element.second<<'\n';}
+      );
+  }
 private:
   std::list<datum> data;
 };

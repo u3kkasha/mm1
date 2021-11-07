@@ -6,7 +6,11 @@
 #include "Event_list.cc"
 #include "Event_scheduler.hpp"
 #include "Job_service_complex.hpp"
+#include "Random_variate_generator.cc"
+#include "Simulation_parameters.cc"
 #include "Timing_unit.cc"
+
+
 namespace Singleton {
 class Simulation {
   /*
@@ -21,10 +25,11 @@ class Simulation {
  */
 
 private:
-  static void initialise() {
-    // Job_service_complex::setup(2);
+  static void initialise() {    
     Timing_unit::reset_clock();
-    Event_list::clear_all_events();
+    Event_list::clear_all_events();    
+    Random_variate_generator::set_seed(
+        Simulation_parameters::random_number_generator_seed);
   }
   static void run() {
     while (not Event_list::is_empty()) {
@@ -35,12 +40,11 @@ private:
   }
 
 public:
-  static void start() {
-
-    initialise();
-    Event_scheduler::schedule_next_arrival(0);
+  static void start() {                 
+    initialise();    
+    Event_scheduler::schedule_next_arrival();
     Event_scheduler::schedule_termination();
-
+   
     run();
   }
 

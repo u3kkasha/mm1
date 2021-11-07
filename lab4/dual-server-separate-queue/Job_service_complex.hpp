@@ -12,6 +12,7 @@ private:
 
 public:
   static SSQS &get_ref_first()    {return first;}
+  static SSQS &get_ref_second()   {return second;}
   static void arrival();
   static void termination();
 

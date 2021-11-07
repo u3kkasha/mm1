@@ -5,6 +5,7 @@
 
 #include "Job.cc"
 #include <list>
+#include <numeric>
 namespace Singleton {
 class Completed_jobs {
   /*
@@ -24,8 +25,17 @@ public:
   static void add(Job completed_job) {
     completed_jobs.push_back(completed_job);
   }
+  
+  static auto average_waiting_duration()
+  {
+      auto total_waiting_time= std::accumulate(completed_jobs.begin(),completed_jobs.end(),0,
+      [](int total,Job& job){ return total+job.get_waiting_time();});
+      
+      return static_cast<double>(total_waiting_time)/get_number_of_completed_jobs();
+  }
+  
   static auto get_list_of_completed_jobs() { return completed_jobs; }
-  static auto get_number_of_completed_jobs() { return completed_jobs.size(); }
+  static int get_number_of_completed_jobs() { return completed_jobs.size(); }
 }; // end of class
 
 } // namespace Singleton

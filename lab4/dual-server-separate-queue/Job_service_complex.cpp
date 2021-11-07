@@ -6,7 +6,7 @@
 #include "Event_list.cc"
 #include "Event_scheduler.hpp"
 #include "SSQS.hpp"
-#include <vector>
+
 namespace Singleton {
 
 SSQS &Job_service_complex::get_ssqs_with_shortest_queue() {

@@ -6,13 +6,15 @@
 #include "Log.hpp"
 #include "Completed_jobs.cc"
 #include "Random_variate_generator.cc"
+#include "debug.h"
 
 void SSQS::arrival()
 {
     
-    if (auto just_arrived_job =Job(Singleton::Timing_unit::get_current_time(),
-            Singleton::Random_variate_generator::get_random_service_duration())
-    ;server.is_busy()) {
+    auto just_arrived_job =Job(Singleton::Timing_unit::get_current_time(),
+            Singleton::Random_variate_generator::get_random_service_duration());
+   
+   if(server.is_busy()) {
       // insert job to the queue
       queue.insert(just_arrived_job);
     } else // server is idle
@@ -28,7 +30,10 @@ void SSQS::arrival()
 }
 void SSQS::departure()
 {
+    
     auto departing_job = server.get_job_being_served_currently();
+         Singleton::Completed_jobs::add(departing_job);   
+         
     if (queue.is_empty()) {
       server.deactivate();
     } else {
@@ -39,9 +44,9 @@ void SSQS::departure()
       server.set_job_being_served_currently(job_to_be_served_next);
       Singleton::Event_scheduler::schedule_next_departure(
           *this, job_to_be_served_next.service_duration);
-     Singleton::Completed_jobs::add(departing_job);   }
+     }
 
-  } // end of departure()
+} // end of departure()
 
 
 

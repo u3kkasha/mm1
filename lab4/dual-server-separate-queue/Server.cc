@@ -7,7 +7,7 @@
 
 class Server final {
 private:
-  bool current_status; // true for busy false for idle
+  bool current_status=0; // true for busy false for idle
   Log history;
   Job job_being_served_currently;
 
